@@ -52,6 +52,16 @@ const findAllByGenere = (column, value) => {
         }
 }
 
+const findByUser = (column, value) => {
+        try{
+                const sqlQuery = `SELECT us.USER_FNAME, us.USER_LNAME, us.USER_EMAIL , us.TEL, us.USER_PROFILE_ID, us_p.GESTION_RENDEZ_VOUS FROM users us LEFT JOIN users_profile us_p ON us_p.USER_PROFILE_ID=us.USER_PROFILE_ID WHERE ${column} = ? AND(us.USER_PROFILE_ID)`;
+                        return query(sqlQuery, [value])
+        }
+        catch(error){
+                throw error
+        }
+}
+
 
 
 module.exports={
@@ -59,5 +69,6 @@ module.exports={
         findPayementByID,
         findBiIdTraite,
         findByStatus,
-        findAllByGenere
+        findAllByGenere,
+        findByUser
 }

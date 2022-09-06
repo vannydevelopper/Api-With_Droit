@@ -30,7 +30,7 @@ const login = async (req, res) => {
                 const user = (await userModel.findById("USERNAME", USERNAME))[0]
                 if (user) {
                         if (user.USER_PASSWORD == md5(USER_PASSWORD)) {
-                                if (user.USER_PROFILE_ID == 28) {
+                                if (user.USER_PROFILE_ID == 5) {
 
                                         // var tokenData = { user: user.USER_ID };
                                         // res.status(200).json({

@@ -5,6 +5,14 @@ const findVerification = async (req, res) => {
                 const { ID_RDV } = req.query
                 const VerificationRequant = (await verificationModel.findAllByID(ID_RDV))[0];
 
+                const userAll = (await verificationModel.findByUser("USER_ID", req.userId))[0]
+                if(userAll && userAll.GESTION_RENDEZ_VOUS==1){
+                        return res.status(200).json({
+                                success:"true",
+                                message:"l'agent a l'acces",
+                                VerificationRequant
+                        })
+                }
                 if (VerificationRequant) {
                         const traite = (await verificationModel.findBiIdTraite("TEMPO_REQUERANT_ID", ID_RDV))[0]
                         if (traite.TRAITE == 1) {
@@ -18,7 +26,6 @@ const findVerification = async (req, res) => {
                                 }
 
                                 const requerantStatut_id = (await verificationModel.findAllByGenere("TEMPO_REQUERANT_ID", ID_RDV))[0]
-                                console.log(requerantStatut_id)
                                 if(requerantStatut_id && requerantStatut_id.REQUERANT_STATUT_ID != 3 && requerantStatut_id.EST_GENERE == 0){
                                         return res.status(200).json({
                                                 success : true,
