@@ -22,9 +22,42 @@ const findPayementByID = async (ID_RDV) =>{
         }
 }
 
+const findBiIdTraite = async (column, value) => {
+        try{
+                const sqlQuery = `SELECT tempo.TRAITE FROM tempo_requerant tempo WHERE ${column} = ?`
+                        return query(sqlQuery, [value])
+        }
+        catch(error){
+                throw error
+        }
+}
+
+const findByStatus = (column, value) => {
+        try{
+                const sqlQuery = `SELECT REQUERANT_STATUT_ID FROM requerant WHERE ${column} = ?`;
+                        return query(sqlQuery, [value])
+        }
+        catch(error){
+                throw error
+        }
+}
+
+const findAllByGenere = (column, value) => {
+        try{
+                const sqlQuery = `SELECT REQUERANT_STATUT_ID,EST_GENERE FROM requerant WHERE ${column} = ?`;
+                        return query(sqlQuery, [value])
+        }
+        catch(error){
+                throw error
+        }
+}
+
 
 
 module.exports={
         findAllByID,
-        findPayementByID
+        findPayementByID,
+        findBiIdTraite,
+        findByStatus,
+        findAllByGenere
 }
